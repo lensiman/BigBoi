@@ -3790,7 +3790,8 @@ function populatePlayModeSelect(path) {
 function updatePlayModeDesc() {
 	var sel = document.getElementById('assignPlayMode');
 	var desc = document.getElementById('playModeDesc');
-	desc.textContent = PLAY_MODES_DEF[sel.value] ? pmDesc(sel.value) : '';
+	var pm = PLAY_MODES_DEF[sel.value];
+	desc.textContent = pm ? pmDesc(sel.value) : '';
 	var input = document.getElementById('assignFileOrUrl');
 	var label = document.getElementById('assignFileLabel');
 	var browseBtn = document.getElementById('assignBrowseBtn');
@@ -3803,7 +3804,7 @@ function updatePlayModeDesc() {
 		label.textContent = 'Playlist file (.m3u)';
 		input.placeholder = '/mp3/playlist.m3u';
 		browseBtn.style.display = '';
-	} else if (m && m.forFile && !m.forFolder) {
+	} else if (pm && pm.forFile && !pm.forFolder) {
 		label.textContent = 'File';
 		input.placeholder = '/mp3/song.mp3';
 		browseBtn.style.display = '';
