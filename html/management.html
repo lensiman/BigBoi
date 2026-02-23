@@ -1805,7 +1805,7 @@ var expectOkToast = false;
 var rfidTagsLoaded = false;
 
 // Play mode definitions
-var PLAY_MODES = {
+var PLAY_MODES_DEF = {
 	3:{name:'Story mode',desc:'Plays folder in order, remembers where you left off',forFile:true,forFolder:true},
 	5:{name:'Play folder',desc:'Plays all tracks in order, no position memory',forFile:false,forFolder:true},
 	6:{name:'Shuffle folder',desc:'Plays all tracks in random order',forFile:false,forFolder:true},
@@ -1823,6 +1823,10 @@ var PLAY_MODES = {
 	13:{name:'Random album',desc:'Picks a random subfolder and plays it in order',forFile:false,forFolder:true},
 	14:{name:'Random album (shuffled)',desc:'Picks a random subfolder and shuffles it',forFile:false,forFolder:true}
 };
+
+function pmName(k) { return T('bb.pm.' + k) !== 'pm.' + k ? T('bb.pm.' + k) : PLAY_MODES_DEF[k].name; }
+function pmDesc(k) { return T('bb.pm.' + k + 'd') !== 'pm.' + k + 'd' ? T('bb.pm.' + k + 'd') : PLAY_MODES_DEF[k].desc; }
+function pmGet(k) { var m = PLAY_MODES_DEF[k]; return m ? {name:pmName(k), desc:pmDesc(k), forFile:m.forFile, forFolder:m.forFolder} : null; }
 
 var MOD_CMDS = [100,179,101,102,103,104,105,106,107,110,111,120,130,140,141,142,150,151,152,0,170,171,172,173,174,184,185,180,181,241,242,243,244,245,246,247,248,249,250];
 var BUTTON_CMDS = [0,170,171,172,173,174,184,185,175,176,177,178,179,180,181,182,183,199,130,140,141,142,150,151,152,120,100,101,102,103,104,105,106,107,110,111,241,242,243,244,245,246,247,248,249,250];
@@ -3713,8 +3717,8 @@ function renderTagList(tags) {
 		card.className = 'tag-card';
 		var icon = tag.modId ? 'ico-settings' : 'ico-music';
 		var modeText = '';
-		if (tag.playMode && PLAY_MODES[tag.playMode]) {
-			modeText = PLAY_MODES[tag.playMode].name;
+		if (tag.playMode && PLAY_MODES_DEF[tag.playMode]) {
+			modeText = pmName(tag.playMode);
 		} else if (tag.modId) {
 			modeText = T('files.rfid.mod.cmd.' + tag.modId);
 		}
@@ -3757,11 +3761,10 @@ function openAssignDialog(tagId, fileOrUrl, playMode) {
 function populatePlayModeSelect(path) {
 	var sel = document.getElementById('assignPlayMode');
 	sel.innerHTML = '';
-	Object.keys(PLAY_MODES).forEach(function(k) {
-		var m = PLAY_MODES[k];
+	Object.keys(PLAY_MODES_DEF).forEach(function(k) {
 		var opt = document.createElement('option');
 		opt.value = k;
-		opt.textContent = m.name;
+		opt.textContent = pmName(k);
 		sel.appendChild(opt);
 	});
 	// Smart default
@@ -3780,8 +3783,7 @@ function populatePlayModeSelect(path) {
 function updatePlayModeDesc() {
 	var sel = document.getElementById('assignPlayMode');
 	var desc = document.getElementById('playModeDesc');
-	var m = PLAY_MODES[sel.value];
-	desc.textContent = m ? m.desc : '';
+	desc.textContent = PLAY_MODES_DEF[sel.value] ? pmDesc(sel.value) : '';
 	var input = document.getElementById('assignFileOrUrl');
 	var label = document.getElementById('assignFileLabel');
 	var browseBtn = document.getElementById('assignBrowseBtn');
@@ -3807,12 +3809,11 @@ function updatePlayModeDesc() {
 
 function buildPlayModeInfoList() {
 	var list = document.getElementById('playModeInfoList');
-	if (list.children.length > 0) return;
-	Object.keys(PLAY_MODES).forEach(function(k) {
-		var m = PLAY_MODES[k];
+	list.innerHTML = '';
+	Object.keys(PLAY_MODES_DEF).forEach(function(k) {
 		var row = document.createElement('div');
 		row.style.cssText = 'margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--pico-muted-border-color)';
-		row.innerHTML = '<strong>' + escHtml(m.name) + '</strong><br>' + escHtml(m.desc);
+		row.innerHTML = '<strong>' + escHtml(pmName(k)) + '</strong><br>' + escHtml(pmDesc(k));
 		list.appendChild(row);
 	});
 }
