@@ -265,11 +265,7 @@
 		"enable": "Activer MQTT",
 		"clientId": {
 			"title": "Identifiant client MQTT",
-<<<<<<< HEAD
-			"placeholder": "par exemple ESPuino-<MAC>",
-=======
 			"placeholder": "par exemple BigBoi",
->>>>>>> bf69055 (Redesign web interface for BigBoi)
 			"validation": ""
 		},
 		"server": {
