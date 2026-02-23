@@ -1824,9 +1824,16 @@ var PLAY_MODES_DEF = {
 	14:{name:'Random album (shuffled)',desc:'Picks a random subfolder and shuffles it',forFile:false,forFolder:true}
 };
 
-function pmName(k) { return T('bb.pm.' + k) !== 'pm.' + k ? T('bb.pm.' + k) : PLAY_MODES_DEF[k].name; }
-function pmDesc(k) { return T('bb.pm.' + k + 'd') !== 'pm.' + k + 'd' ? T('bb.pm.' + k + 'd') : PLAY_MODES_DEF[k].desc; }
-function pmGet(k) { var m = PLAY_MODES_DEF[k]; return m ? {name:pmName(k), desc:pmDesc(k), forFile:m.forFile, forFolder:m.forFolder} : null; }
+function pmName(k) {
+	var t = T('bb.pm.' + k);
+	var def = PLAY_MODES_DEF[k];
+	return (t && t !== String(k) && t !== 'bb.pm.' + k) ? t : (def ? def.name : String(k));
+}
+function pmDesc(k) {
+	var t = T('bb.pm.' + k + 'd');
+	var def = PLAY_MODES_DEF[k];
+	return (t && t !== k + 'd' && t !== 'bb.pm.' + k + 'd') ? t : (def ? def.desc : '');
+}
 
 var MOD_CMDS = [100,179,101,102,103,104,105,106,107,110,111,120,130,140,141,142,150,151,152,0,170,171,172,173,174,184,185,180,181,241,242,243,244,245,246,247,248,249,250];
 var BUTTON_CMDS = [0,170,171,172,173,174,184,185,175,176,177,178,179,180,181,182,183,199,130,140,141,142,150,151,152,120,100,101,102,103,104,105,106,107,110,111,241,242,243,244,245,246,247,248,249,250];
