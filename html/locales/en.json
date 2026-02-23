@@ -3,7 +3,7 @@
 	"restart": "Restart",
 	"reset": "Reset",
 	"execute": "Execute",
-	"title": "ESPuino",
+	"title": "BigBoi",
 	"shutdown": "Shutdown",
 	"log": "Log",
 	"info": "Info",
@@ -14,24 +14,30 @@
 	"showhide": "Show/Hide",
 	"infos": "Infos",
 	"darkmode": "Dark Mode",
-	"restartinfo": "ESPuino is being restarted...<br>Page reloads automatically after restart finished.",
-	"shutdowninfo": "ESPuino is now switched off...<br>Page reloads automatically when the ESPuino is switched on again.",
+	"restartinfo": "BigBoi is being restarted...<br>Page reloads automatically after restart finished.",
+	"shutdowninfo": "BigBoi is now switched off...<br>Page reloads automatically when the BigBoi is switched on again.",
 	"toast": {
 		"rfidDetect": "RFID tag {{rfidId}} detected.",
 		"success": "Action performed successfully.",
-		"conlost": "Connection to ESPuino broken! Please reload website.",
+		"conlost": "Connection to BigBoi broken! Please reload website.",
 		"dropout": "slow stream, dropouts are possible."
 	},
 	"nav": {
-		"control": "Control",
+		"control": "Player",
 		"rfid": "RFID",
 		"wifi": "WiFi",
 		"mqtt": "MQTT",
 		"ftp": "FTP",
 		"bluetooth": "Bluetooth",
-		"general": "General",
+		"general": "Settings",
+		"settings": "Settings",
 		"tools": "Tools",
 		"help": "Help"
+	},
+	"quickAssign": {
+		"idle": "Place a card to assign music",
+		"newTag": "New card: {{tagId}}",
+		"assignBtn": "Link Music"
 	},
 	"settingsex": {
 		"title": "Advanced settings",
@@ -98,7 +104,7 @@
 			"validation": "Enter the WiFi's password"
 		},
 		"hostname": {
-			"title": "ESPuino's name (hostname)",
+			"title": "BigBoi's name (hostname)",
 			"placeholder": "espuino",
 			"validation": "Enter a valid hostname"
 		},
@@ -259,7 +265,11 @@
 		"enable": "Enable MQTT",
 		"clientId": {
 			"title": "MQTT-ClientId",
+<<<<<<< HEAD
 			"placeholder": "f.e. ESPuino-<MAC>",
+=======
+			"placeholder": "f.e. BigBoi",
+>>>>>>> bf69055 (Redesign web interface for BigBoi)
 			"validation": ""
 		},
 		"server": {
@@ -323,8 +333,8 @@
 			"indicator": "WiFi Mode (RSSI: {{rssi}} dBm)"
 		},
 		"sink": {
-			"title": "ESPuino as Bluetooth speaker",
-			"desc": "ESPuino is started as a Bluetooth speaker. After switching to this mode, the web interface will no longer be available until the system is restarted in normal mode.",
+			"title": "BigBoi as Bluetooth speaker",
+			"desc": "BigBoi is started as a Bluetooth speaker. After switching to this mode, the web interface will no longer be available until the system is restarted in normal mode.",
 			"button": "Start as Bluetooth speaker",
 			"indicator": "Bluetooth Speaker Mode"
 		},
@@ -394,7 +404,7 @@
 			"desc": "Show voltage-status via Neopixel",
 			"lowWarning": "Show warning below this threshold (in volt)",
 			"lowCritical": "Lowest voltage (in volt), that is indicated by one LED",
-			"criticalShutoff": "Below this voltage (in volt), ESPuino turns off",
+			"criticalShutoff": "Below this voltage (in volt), BigBoi turns off",
 			"high": "Voltage (in volt), that is indicated by all LEDs",
 			"measureInterval": "Interval between measurements (in minutes)"
 		},
@@ -410,7 +420,7 @@
 	"tools": {
 		"nvs": {
 			"title": "Saved RFID assignments",
-			"desc": "The RFID assignments are not stored on the SD card but on the internal, non-volative storage (NVS) of the ESPuino.",
+			"desc": "The RFID assignments are not stored on the SD card but on the internal, non-volative storage (NVS) of the BigBoi.",
 			"list": {
 				"title": "List of all stored RFID assignments"
 			},
@@ -441,7 +451,7 @@
 	"help": {
 		"forum": {
 			"title": "Forum",
-			"desc": "Having problems or aim to discuss about ESPuino?<br /> Join us at <a href=\"https://forum.espuino.de\" target=\"_blank\">ESPuino-Forum</a>! Especially there's a lot of (german) <a href=\"https://forum.espuino.de/c/dokumentation/anleitungen/10\" target=\"_blank\">documentation</a> online!"
+			"desc": "Having problems or aim to discuss about BigBoi?<br /> Join us at <a href=\"https://forum.espuino.de\" target=\"_blank\">BigBoi-Forum</a>! Especially there's a lot of (german) <a href=\"https://forum.espuino.de/c/dokumentation/anleitungen/10\" target=\"_blank\">documentation</a> online!"
 		},
 		"swagger": {
 			"title": "Swagger",
@@ -460,8 +470,8 @@
 	},
 	"systeminfo": {
 		"title": "Information",
-		"softwareversion": "ESPuino {{softwareversion}}",
-		"gitversion": "ESPuino {{gitversion}}",
+		"softwareversion": "BigBoi {{softwareversion}}",
+		"gitversion": "BigBoi {{gitversion}}",
 		"arduinoversion": "Arduino Version: {{arduinoversion}} (ESP-IDF {{idfversion}})",
 		"hardware": "Hardware: {{hwmodel}}, Revision {{hwrevision}}, CPU: {{hwfreq}} MHZ",
 		"freeheap": "Free heap: {{freeheap}} Bytes",

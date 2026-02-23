@@ -3,7 +3,7 @@
 	"restart": "Neustart",
 	"reset": "Reset",
 	"execute": "Ausführen",
-	"title": "ESPuino",
+	"title": "BigBoi",
 	"shutdown": "Ausschalten",
 	"log": "Log",
 	"info": "Info",
@@ -14,24 +14,30 @@
 	"showhide": "Ein-/Ausblenden",
 	"infos": "Infos",
 	"darkmode": "Dunkelmodus",
-	"restartinfo": "ESPuino wird jetzt neu gestartet...<br>Die Seite lädt sich nach dem Neustart automatisch neu.",
-	"shutdowninfo": "ESPuino wird jetzt ausgeschaltet...<br>Die Seite lädt sich nach dem Wiedereinschalten automatisch neu.",
+	"restartinfo": "BigBoi wird jetzt neu gestartet...<br>Die Seite lädt sich nach dem Neustart automatisch neu.",
+	"shutdowninfo": "BigBoi wird jetzt ausgeschaltet...<br>Die Seite lädt sich nach dem Wiedereinschalten automatisch neu.",
 	"toast": {
 		"rfidDetect": "RFID Tag mit {{rfidId}} erkannt.",
 		"success": "Aktion erfolgreich ausgeführt.",
-		"conlost": "Die Verbindung zum ESPuino ist unterbrochen! Bitte Seite neu laden.",
+		"conlost": "Die Verbindung zum BigBoi ist unterbrochen! Bitte Seite neu laden.",
 		"dropout": "Langsamer Stream, Aussetzer möglich."
 	},
 	"nav": {
-		"control": "Steuerung",
+		"control": "Player",
 		"rfid": "RFID",
 		"wifi": "WLAN",
 		"mqtt": "MQTT",
 		"ftp": "FTP",
 		"bluetooth": "Bluetooth",
-		"general": "Allgemein",
+		"general": "Einstellungen",
+		"settings": "Einstellungen",
 		"tools": "Tools",
 		"help": "Hilfe"
+	},
+	"quickAssign": {
+		"idle": "Karte auflegen, um Musik zuzuweisen",
+		"newTag": "Neue Karte: {{tagId}}",
+		"assignBtn": "Musik verknüpfen"
 	},
 	"settingsex": {
 		"title": "Erweiterte Einstellungen",
@@ -98,7 +104,7 @@
 			"validation": "Bitte Passwort vom WLANs eintragen"
 		},
 		"hostname": {
-			"title": "ESPuino-Name (Hostname)",
+			"title": "BigBoi-Name (Hostname)",
 			"placeholder": "espuino",
 			"validation": "Trage einen validen Hostnamen ein"
 		},
@@ -259,7 +265,11 @@
 		"enable": "MQTT aktivieren",
 		"clientId": {
 			"title": "MQTT-ClientId",
+<<<<<<< HEAD
 			"placeholder": "z.B. ESPuino-<MAC>",
+=======
+			"placeholder": "z.B. BigBoi",
+>>>>>>> bf69055 (Redesign web interface for BigBoi)
 			"validation": ""
 		},
 		"server": {
@@ -323,8 +333,8 @@
 			"indicator": "WiFi-Modus (RSSI: {{rssi}} dBm)"
 		},
 		"sink": {
-			"title": "ESPuino als Bluetooth-Lautsprecher",
-			"desc": "ESPuino wird als Bluetooth-Lautsprecher gestartet. Nach dem Wechsel in diesen Modus wird die Web-Schnittstelle nicht mehr zur Verfügung stehen, bis das System im normalen Modus neu gestartet wird.",
+			"title": "BigBoi als Bluetooth-Lautsprecher",
+			"desc": "BigBoi wird als Bluetooth-Lautsprecher gestartet. Nach dem Wechsel in diesen Modus wird die Web-Schnittstelle nicht mehr zur Verfügung stehen, bis das System im normalen Modus neu gestartet wird.",
 			"button": "Als Bluetooth-Lautsprecher starten",
 			"indicator": "Bluetooth-Lautsprecher Modus"
 		},
@@ -394,7 +404,7 @@
 			"desc": "Status über Neopixel anzeigen",
 			"lowWarning": "Unter dieser Spannung (in Volt) wird eine Warnung angezeigt",
 			"lowCritical": "Eine LED leuchtet bei dieser Spannung (in Volt)",
-			"criticalShutoff": "Unter dieser Spannung (in Volt) schaltet der ESPuino ab",
+			"criticalShutoff": "Unter dieser Spannung (in Volt) schaltet der BigBoi ab",
 			"high": "Alle LEDs leuchten bei dieser Spannung (in Volt)",
 			"measureInterval": "Zeitabstand der Messung (in Minuten)"
 		},
@@ -410,13 +420,13 @@
 	"tools": {
 		"nvs": {
 			"title": "Gespeicherte RFID-Zuweisungen",
-			"desc": "Die RFID-Zuweisungen werden nicht auf der SD-Karte, sondern im internen, nicht-flüchtigen Speicher (NVS) des ESPuinos gespeichert.",
+			"desc": "Die RFID-Zuweisungen werden nicht auf der SD-Karte, sondern im internen, nicht-flüchtigen Speicher (NVS) des BigBois gespeichert.",
 			"list": {
 				"title": "Liste aller gespeicherten RFID-Zuweisungen"
 			},
 			"erase": {
 				"title": "Alle RFID-Zuweisungen löschen",
-				"desc": "Über den Importer werden lediglich neue Einträge importiert, jedoch keine bestehenden Einträge aktiv gelöscht. Im Falle einer doppelten Zuweisung wird ein Eintrag allenfalls überschrieben. Mit dieser Funktion können alle bestehenden RFID-Zuweisungen gelöscht werden, so dass der ESPuino im Anschluss keinerlei Karten mehr kennt. Wird im Anschluss der Importer gestartet, befinden sich im Speicher des ESPuino anschließend exakt nur solche Zuweisungen, die Teil der Backup-Datei sind. Weitere Infos gibt es <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">hier</a>.",
+				"desc": "Über den Importer werden lediglich neue Einträge importiert, jedoch keine bestehenden Einträge aktiv gelöscht. Im Falle einer doppelten Zuweisung wird ein Eintrag allenfalls überschrieben. Mit dieser Funktion können alle bestehenden RFID-Zuweisungen gelöscht werden, so dass der BigBoi im Anschluss keinerlei Karten mehr kennt. Wird im Anschluss der Importer gestartet, befinden sich im Speicher des BigBoi anschließend exakt nur solche Zuweisungen, die Teil der Backup-Datei sind. Weitere Infos gibt es <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">hier</a>.",
 				"button": "Alle Zuweisungen löschen",
 				"prompt": "Alle RFID-Zuweisungen wirklich löschen?"
 			},
@@ -441,7 +451,7 @@
 	"help": {
 		"forum": {
 			"title": "Forum",
-			"desc": "Du hast Probleme mit ESPuino oder bist an einem Erfahrungsaustausch interessiert?<br />Dann schaue doch mal im <a href=\"https://forum.espuino.de\" target=\"_blank\">ESPuino-Forum</a> vorbei! Insbesondere gibt es dort auch einen <a href=\"https://forum.espuino.de/c/dokumentation/anleitungen/10\" target=\"_blank\">Bereich</a>, in dem reichlich Dokumentation hinterlegt ist. Wir freuen uns auf deinen Besuch!"
+			"desc": "Du hast Probleme mit BigBoi oder bist an einem Erfahrungsaustausch interessiert?<br />Dann schaue doch mal im <a href=\"https://forum.espuino.de\" target=\"_blank\">BigBoi-Forum</a> vorbei! Insbesondere gibt es dort auch einen <a href=\"https://forum.espuino.de/c/dokumentation/anleitungen/10\" target=\"_blank\">Bereich</a>, in dem reichlich Dokumentation hinterlegt ist. Wir freuen uns auf deinen Besuch!"
 		},
 		"swagger": {
 			"title": "Swagger",
@@ -460,8 +470,8 @@
 	},
 	"systeminfo": {
 		"title": "Information",
-		"softwareversion": "ESPuino {{softwareversion}}",
-		"gitversion": "ESPuino {{gitversion}}",
+		"softwareversion": "BigBoi {{softwareversion}}",
+		"gitversion": "BigBoi {{gitversion}}",
 		"arduinoversion": "Arduino Version: {{arduinoversion}} (ESP-IDF {{idfversion}})",
 		"hardware": "Hardware: {{hwmodel}}, Revision {{hwrevision}}, CPU: {{hwfreq}} MHZ",
 		"freeheap": "Freier Heap: {{freeheap}} Bytes",
