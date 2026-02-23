@@ -1774,7 +1774,7 @@ dialog .dialog-close {
 		<h3 id="infoTitle">Info</h3>
 		<button class="dialog-close" onclick="this.closest('dialog').close()">&times;</button>
 	</div>
-	<div id="infoContent" style="white-space:pre-wrap;font-size:0.85rem;max-height:60vh;overflow-y:auto"></div>
+	<div id="infoContent" style="font-size:0.85rem;max-height:60vh;overflow-y:auto"></div>
 	<div class="dialog-actions">
 		<button id="infoRefresh" type="button">Refresh</button>
 		<button onclick="this.closest('dialog').close()" data-i18n="ok">OK</button>
@@ -4326,19 +4326,43 @@ function showInfo() {
 	fetch('http://' + host + '/info')
 		.then(function(r) { return r.json(); })
 		.then(function(info) {
-			var c = '';
-			if (info.software) c += 'Version: ' + info.software.version + '\nGit: ' + info.software.git + '\nArduino: ' + info.software.arduino + ' (IDF ' + info.software.idf + ')\n';
-			if (info.hardware) c += 'Hardware: ' + info.hardware.model + ' Rev ' + info.hardware.revision + ' @ ' + info.hardware.freq + 'MHz\n';
-			if (info.memory) c += 'Free heap: ' + info.memory.freeHeap + 'B\nLargest block: ' + info.memory.largestFreeBlock + 'B\n' + (info.memory.freePSRam ? 'Free PSRAM: ' + info.memory.freePSRam + 'B\n' : '');
-			if (info.wifi) { c += 'IP: ' + info.wifi.ip + '\nMAC: ' + info.wifi.macAddress + '\nRSSI: ' + info.wifi.rssi + ' dBm\n'; updateWifiStatus(info.wifi.rssi); }
+			var rows = [];
+			function section(title) { rows.push('<tr><td colspan="2" style="font-weight:600;padding-top:12px;border:none">' + title + '</td></tr>'); }
+			function row(label, val) { rows.push('<tr><td style="color:var(--pico-muted-color);padding:2px 12px 2px 0;white-space:nowrap;border:none">' + label + '</td><td style="padding:2px 0;border:none">' + escHtml(String(val)) + '</td></tr>'); }
+			if (info.software) {
+				section('Software');
+				row('Version', info.software.version);
+				row('Git', info.software.git);
+				row('Arduino', info.software.arduino + ' (IDF ' + info.software.idf + ')');
+			}
+			if (info.hardware) {
+				section('Hardware');
+				row('Model', info.hardware.model + ' Rev ' + info.hardware.revision);
+				row('CPU', info.hardware.freq + ' MHz');
+			}
+			if (info.memory) {
+				section('Memory');
+				row('Free heap', (info.memory.freeHeap / 1024).toFixed(1) + ' KB');
+				row('Largest block', (info.memory.largestFreeBlock / 1024).toFixed(1) + ' KB');
+				if (info.memory.freePSRam) row('Free PSRAM', (info.memory.freePSRam / 1024).toFixed(0) + ' KB');
+			}
+			if (info.wifi) {
+				section('Network');
+				row('IP', info.wifi.ip);
+				row('MAC', info.wifi.macAddress);
+				row('Signal', info.wifi.rssi + ' dBm');
+				updateWifiStatus(info.wifi.rssi);
+			}
 			if (info.battery) {
-				c += 'Battery: ' + info.battery.currVoltage.toFixed(2) + 'V';
-				if (info.battery.chargeLevel) c += ' (' + info.battery.chargeLevel.toFixed(0) + '%)';
-				c += '\n';
+				section('Battery');
+				row('Voltage', info.battery.currVoltage.toFixed(2) + ' V');
+				if (info.battery.chargeLevel) row('Charge', info.battery.chargeLevel.toFixed(0) + '%');
 				updateBatteryStatus(info.battery);
 			}
-			document.getElementById('infoContent').textContent = c;
-			document.getElementById('infoTitle').textContent = T('systeminfo.title') || 'Info';
+			var content = document.getElementById('infoContent');
+			content.style.fontFamily = '';
+			content.innerHTML = '<table style="width:100%;border-collapse:collapse">' + rows.join('') + '</table>';
+			document.getElementById('infoTitle').textContent = 'System Info';
 			document.getElementById('infoRefresh').onclick = showInfo;
 			document.getElementById('infoDialog').showModal();
 		}).catch(function(e) { showToast('Failed to fetch info', 'error'); });
@@ -4348,8 +4372,10 @@ function showLog() {
 	fetch('http://' + host + '/log')
 		.then(function(r) { return r.text(); })
 		.then(function(text) {
-			document.getElementById('infoContent').style.fontFamily = 'monospace';
-			document.getElementById('infoContent').textContent = text;
+			var content = document.getElementById('infoContent');
+			content.style.fontFamily = 'monospace';
+			content.style.whiteSpace = 'pre-wrap';
+			content.textContent = text;
 			document.getElementById('infoTitle').textContent = T('log') || 'Log';
 			document.getElementById('infoRefresh').onclick = showLog;
 			document.getElementById('infoDialog').showModal();
