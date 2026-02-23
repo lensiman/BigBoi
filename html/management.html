@@ -29,9 +29,10 @@ var remoteHost = "192.168.1.207";
 }
 * { box-sizing: border-box; }
 body {
-	margin: 0;
+	margin: 0 auto;
 	padding: 8px 8px calc(var(--nav-height) + 16px) 8px;
 	min-width: 300px;
+	max-width: 1100px;
 	font-family: system-ui, -apple-system, sans-serif;
 }
 svg.icon { width: 1.2em; height: 1.2em; vertical-align: -0.15em; fill: currentColor; }
@@ -245,6 +246,74 @@ dialog .dialog-close {
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn-row button { flex: 1; min-width: 0; }
 .file-picker-list { max-height: 300px; overflow-y: auto; }
+
+/* Light mode contrast fixes */
+[data-theme=light] { --espuino-primary: #1558b0; }
+[data-theme=light] .bottom-nav { border-color: #ced4da; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+[data-theme=light] .player-controls button:hover,
+[data-theme=light] .settings-group-header:hover,
+[data-theme=light] .file-list li:hover { background: #e9ecef; }
+[data-theme=light] .player-controls button { color: #333; }
+[data-theme=light] .settings-group { border-color: #ced4da; }
+[data-theme=light] .settings-group-body { background: #fafbfc; }
+[data-theme=light] .tag-card { border-color: #ced4da; background: #fafbfc; }
+[data-theme=light] .tag-card .tag-id { color: #555; }
+[data-theme=light] .tag-card .tag-mode { color: #555; }
+[data-theme=light] .tag-card .tag-actions button { color: #666; }
+[data-theme=light] .tag-card .tag-actions button:hover { color: #222; }
+[data-theme=light] .file-list li { border-color: #dde1e5; }
+[data-theme=light] .file-list li .file-action { opacity: 0.55; color: #333; }
+[data-theme=light] .file-list li .file-action:hover { opacity: 1; }
+[data-theme=light] .quick-assign,
+[data-theme=light] .upload-area { border-color: #bfc5cb; background: #f6f8fa; }
+[data-theme=light] .progress-track { background: #d5d9dd; }
+[data-theme=light] .status-bar { color: #555; }
+[data-theme=light] .bedtime-bar { color: #555; }
+[data-theme=light] .bedtime-bar:hover { color: #222; }
+[data-theme=light] .breadcrumb span { color: #666; }
+[data-theme=light] .fab { box-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+[data-theme=light] dialog { box-shadow: 0 4px 20px rgba(0,0,0,0.12); border: 1px solid #ced4da; }
+[data-theme=light] .dialog-close { color: #666; }
+[data-theme=light] .dialog-close:hover { color: #222; }
+[data-theme=light] .toast { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+[data-theme=light] .volume-row button { color: #333; }
+
+/* Desktop */
+@media (min-width: 768px) {
+	body { padding: calc(var(--nav-height) + 24px) 24px 24px; }
+	.bottom-nav { top: 0; bottom: auto; border-top: none; border-bottom: 1px solid var(--pico-muted-border-color); }
+	.fab { bottom: 16px; }
+	/* Player dashboard: cover left, controls right, widgets below */
+	#view-player.active { display: grid; grid-template-columns: 320px 1fr; gap: 0.75rem 2rem; }
+	#view-player > * { grid-column: 2; }
+	#view-player .status-bar { grid-column: 1 / -1; }
+	#view-player .cover-container { grid-column: 1; grid-row: 2 / 6; align-self: start; }
+	#view-player .cover-container img { max-height: 320px; }
+	#view-player .track-info .track-name { font-size: 1.25rem; }
+	#view-player .player-controls { gap: 20px; }
+	#view-player .bedtime-bar,
+	#view-player .bedtime-buttons,
+	#view-player .quick-assign { grid-column: 1 / -1; }
+	#view-player .bedtime-bar { margin-top: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--pico-muted-border-color); }
+	/* Files: list fills viewport */
+	#view-files .file-list { max-height: calc(100vh - var(--nav-height) - 180px); overflow-y: auto; }
+	/* Settings: all open, masonry columns */
+	#view-settings .settings-group-body { display: block !important; }
+	#view-settings .settings-group-header svg.chevron { display: none; }
+	#view-settings .settings-group-header { cursor: default; }
+	#view-settings .settings-group-header:hover { background: transparent !important; }
+	#view-settings.active { display: block; columns: 2; column-gap: 16px; }
+	#view-settings > h2, #view-settings > :nth-child(2) { column-span: all; }
+	#view-settings .settings-group { break-inside: avoid; margin-bottom: 16px; }
+	/* Tags: grid + scrollable */
+	#tagList { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+	.file-list li .file-actions { opacity: 0; transition: opacity 0.15s; }
+	.file-list li:hover .file-actions { opacity: 1; }
+	.progress-track { height: 4px; transition: height 0.15s; }
+	.progress-track:hover { height: 10px; }
+	dialog { max-width: 600px; }
+	#infoDialog { max-width: 800px; }
+}
 </style>
 </head>
 <body>
@@ -260,6 +329,7 @@ dialog .dialog-close {
 <symbol id="ico-vol-down" viewBox="0 0 24 24"><path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/></symbol>
 <symbol id="ico-vol-up" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></symbol>
 <symbol id="ico-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></symbol>
+<symbol id="ico-sun" viewBox="0 0 24 24"><path d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></symbol>
 <symbol id="ico-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></symbol>
 <symbol id="ico-file" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></symbol>
 <symbol id="ico-music" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></symbol>
@@ -392,6 +462,9 @@ dialog .dialog-close {
 			<option value="de">Deutsch</option>
 			<option value="fr">Français</option>
 		</select>
+		<button id="themeToggle" onclick="toggleTheme()" style="border:none;background:none;cursor:pointer;color:inherit;padding:4px;flex-shrink:0" title="Toggle light/dark">
+			<svg class="icon icon-lg"><use href="#ico-sun"/></svg>
+		</button>
 	</div>
 
 	<!-- Volume -->
@@ -2072,6 +2145,20 @@ function updateBatteryStatus(bat) {
 	}
 }
 
+function toggleTheme() {
+	var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+	var t = isDark ? 'light' : 'dark';
+	document.documentElement.setAttribute('data-theme', t);
+	localStorage.setItem('espuino-theme', t);
+	updateThemeIcon();
+}
+
+function updateThemeIcon() {
+	var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+	var btn = document.getElementById('themeToggle');
+	if (btn) btn.querySelector('use').setAttribute('href', isDark ? '#ico-sun' : '#ico-moon');
+}
+
 function setTitle(t) {
 	document.title = t || 'BigBoi';
 }
@@ -2108,6 +2195,7 @@ function init() {
 	// Dark mode default, with localStorage override
 	var theme = localStorage.getItem('espuino-theme') || 'dark';
 	document.documentElement.setAttribute('data-theme', theme);
+	updateThemeIcon();
 
 	// Remote host image fix
 	if (host !== location.hostname) {
@@ -2127,6 +2215,16 @@ function init() {
 			.then(function(d) { if (d.battery) updateBatteryStatus(d.battery); })
 			.catch(function(){});
 	}, 30000);
+
+	document.addEventListener('keydown', function(e) {
+		if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+		var v = document.getElementById('volumeSlider');
+		if (e.key === ' ') { e.preventDefault(); sendCmd(170); }
+		else if (e.key === 'ArrowRight') sendCmd(172);
+		else if (e.key === 'ArrowLeft') sendCmd(171);
+		else if (e.key === 'ArrowUp') { e.preventDefault(); v.value = Math.min(21, Number(v.value)+1); sendVolume(Number(v.value)); }
+		else if (e.key === 'ArrowDown') { e.preventDefault(); v.value = Math.max(1, Number(v.value)-1); sendVolume(Number(v.value)); }
+	});
 
 	initI18n();
 	wsConnect();
