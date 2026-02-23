@@ -17,7 +17,7 @@
 	"restartinfo": "BigBoi wird jetzt neu gestartet...<br>Die Seite lädt sich nach dem Neustart automatisch neu.",
 	"shutdowninfo": "BigBoi wird jetzt ausgeschaltet...<br>Die Seite lädt sich nach dem Wiedereinschalten automatisch neu.",
 	"toast": {
-		"rfidDetect": "RFID Tag mit {{rfidId}} erkannt.",
+		"rfidDetect": "Karte {{rfidId}} erkannt.",
 		"success": "Aktion erfolgreich ausgeführt.",
 		"conlost": "Die Verbindung zum BigBoi ist unterbrochen! Bitte Seite neu laden.",
 		"dropout": "Langsamer Stream, Aussetzer möglich."
@@ -175,7 +175,7 @@
 			"progress": "{{percent}}% ({{speed}} KB/s), {{remaining.value}} {{remaining.unit}} verbleibend..."
 		},
 		"rfid": {
-			"title": "RFID-Zuweisungen",
+			"title": "Kartenzuweisungen",
 			"idNumber": "RFID-Chip-Nummer (12-stellig) oder <a href=\"https://forum.espuino.de/t/virtual-rfid-cards\" target=\"_blank\">virtuell</a>",
 			"music": "Musik",
 			"modification": "Modifikation",
@@ -246,16 +246,16 @@
 					"184": "Springe zum nächsten Ordner",
 					"185": "Springe zum vorherigen Ordner",
 					"199": "Taskauslastung anzeigen (Konsole)",
-					"241": "Spiele virtuelle RFID-Karte 01",
-					"242": "Spiele virtuelle RFID-Karte 02",
-					"243": "Spiele virtuelle RFID-Karte 03",
-					"244": "Spiele virtuelle RFID-Karte 04",
-					"245": "Spiele virtuelle RFID-Karte 05",
-					"246": "Spiele virtuelle RFID-Karte 06",
-					"247": "Spiele virtuelle RFID-Karte 07",
-					"248": "Spiele virtuelle RFID-Karte 08",
-					"249": "Spiele virtuelle RFID-Karte 09",
-					"250": "Spiele virtuelle RFID-Karte 10"
+					"241": "Spiele virtuelle Karte 01",
+					"242": "Spiele virtuelle Karte 02",
+					"243": "Spiele virtuelle Karte 03",
+					"244": "Spiele virtuelle Karte 04",
+					"245": "Spiele virtuelle Karte 05",
+					"246": "Spiele virtuelle Karte 06",
+					"247": "Spiele virtuelle Karte 07",
+					"248": "Spiele virtuelle Karte 08",
+					"249": "Spiele virtuelle Karte 09",
+					"250": "Spiele virtuelle Karte 10"
 				}
 			}
 		}
@@ -419,28 +419,28 @@
 	},
 	"tools": {
 		"nvs": {
-			"title": "Gespeicherte RFID-Zuweisungen",
-			"desc": "Die RFID-Zuweisungen werden nicht auf der SD-Karte, sondern im internen, nicht-flüchtigen Speicher (NVS) des BigBois gespeichert.",
+			"title": "Gespeicherte Kartenzuweisungen",
+			"desc": "Kartenzuweisungen werden im internen Speicher (NVS) des BigBoi gespeichert, nicht auf der SD-Karte.",
 			"list": {
-				"title": "Liste aller gespeicherten RFID-Zuweisungen"
+				"title": "Alle gespeicherten Karten"
 			},
 			"erase": {
-				"title": "Alle RFID-Zuweisungen löschen",
-				"desc": "Über den Importer werden lediglich neue Einträge importiert, jedoch keine bestehenden Einträge aktiv gelöscht. Im Falle einer doppelten Zuweisung wird ein Eintrag allenfalls überschrieben. Mit dieser Funktion können alle bestehenden RFID-Zuweisungen gelöscht werden, so dass der BigBoi im Anschluss keinerlei Karten mehr kennt. Wird im Anschluss der Importer gestartet, befinden sich im Speicher des BigBoi anschließend exakt nur solche Zuweisungen, die Teil der Backup-Datei sind. Weitere Infos gibt es <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">hier</a>.",
+				"title": "Alle Karten löschen",
+				"desc": "Über den Importer werden lediglich neue Einträge importiert, jedoch keine bestehenden Einträge aktiv gelöscht. Im Falle einer doppelten Zuweisung wird ein Eintrag allenfalls überschrieben. Mit dieser Funktion können alle bestehenden Kartenzuweisungen gelöscht werden, so dass der BigBoi im Anschluss keinerlei Karten mehr kennt. Wird im Anschluss der Importer gestartet, befinden sich im Speicher des BigBoi anschließend exakt nur solche Zuweisungen, die Teil der Backup-Datei sind. Weitere Infos gibt es <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">hier</a>.",
 				"button": "Alle Zuweisungen löschen",
-				"prompt": "Alle RFID-Zuweisungen wirklich löschen?"
+				"prompt": "Alle Kartenzuweisungen wirklich löschen?"
 			},
 			"delete": {
-				"title": "RFID-Zuweisung entfernen",
+				"title": "Karte entfernen",
 				"prompt": "Gespeicherte Zuweisung \"{{rfid}}\" wirklich entfernen?"
 			},
 			"import": {
 				"title": "Import",
-				"desc": "Hier kann eine Backup-Datei hochgeladen werden, um RFID-Zuweisungen zu importieren."
+				"desc": "Hier kann eine Backup-Datei hochgeladen werden, um Kartenzuweisungen zu importieren."
 			},
 			"export": {
 				"title": "Export",
-				"desc": "Hier kann eine Backup-Datei heruntergeladen werden, um RFID-Zuweisungen zu exportieren."
+				"desc": "Hier kann eine Backup-Datei heruntergeladen werden, um Kartenzuweisungen zu exportieren."
 			}
 		},
 		"fwupdate": {
@@ -485,5 +485,53 @@
 		"currvoltage": "Aktuelle Batteriespannung: {{currvoltage}} V",
 		"chargelevel": "Aktuelle Batterieladung: {{chargelevel}} %",
 		"hallsensor": "HallEffectSensor NullFieldValue: {{hsnullfieldvalue}}, actual: {{hsactual}}, diff:{{hsdiff}}, LastWaitFor_State:{{hslastwaitforstate}} (waited:{{hswaited}} ms)"
+	},
+	"bb": {
+		"cards": "Karten",
+		"linkCard": "Karte verknüpfen",
+		"cardNumber": "Kartennummer (12 Ziffern)",
+		"assignMusic": "Musik zuweisen",
+		"bedtime": "Schlafmodus",
+		"bedtimeOff": "Aus",
+		"volume": "Lautstärke",
+		"startupVol": "Startlautstärke",
+		"volLimit": "Lautstärkebegrenzung",
+		"hpLimit": "Kopfhörer-Limit",
+		"rememberVol": "Lautstärke merken",
+		"smoothQuiet": "Feinere leise Stufen",
+		"pauseMuted": "Pause bei Stummschaltung",
+		"playback": "Wiedergabe",
+		"pauseLift": "Pause beim Abheben der Karte",
+		"resumePower": "Weiterspielen nach Ausschalten",
+		"resumeSwitch": "Weiterspielen beim Kartenwechsel",
+		"autoPlay": "Automatisch abspielen beim Einschalten",
+		"ignoreRetap": "Erneutes Auflegen ignorieren",
+		"monoAudio": "Mono-Audio",
+		"turnOffIdle": "Ausschalten nach Leerlauf",
+		"sound": "Klang",
+		"equalizer": "Equalizer",
+		"fileOrdering": "Dateisortierung",
+		"subfolderDepth": "Unterordner-Tiefe",
+		"lights": "Beleuchtung",
+		"lightBrightness": "Helligkeit",
+		"nightLight": "Nachtlicht",
+		"controls": "Steuerung",
+		"volKnob": "Lautstärkeregler",
+		"reverseKnob": "Drehrichtung umkehren",
+		"actionCards": "Aktionskarten",
+		"actionCardsDesc": "Spezielle Aktionen auf Karten zuweisen (Schlaftimer, Tastensperre, usw.)",
+		"action": "Aktion",
+		"cardBackup": "Karten-Sicherung",
+		"eraseAll": "Alle Karten löschen",
+		"erasePrompt": "Alle Kartenzuweisungen löschen? Dies kann nicht rückgängig gemacht werden.",
+		"removeCard": "Karte entfernen",
+		"removePrompt": "Karte {{id}} entfernen?",
+		"fileFolder": "Datei / Ordner",
+		"playMode": "Abspielmodus",
+		"playModeExplain": "Was bedeuten die Abspielmodi?",
+		"fillFields": "Bitte Kartennummer und Datei/URL ausfüllen",
+		"smartSort": "Natürliche Sortierung (A=a)",
+		"smartSortCase": "Natürliche Sortierung (A≠a)",
+		"basicSort": "Standard (ASCII-Reihenfolge)"
 	}
 }

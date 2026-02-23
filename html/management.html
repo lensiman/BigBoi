@@ -323,7 +323,7 @@ dialog .dialog-close {
 	</div>
 	<div class="bedtime-bar" onclick="toggleBedtime()">
 		<svg class="icon"><use href="#ico-moon"/></svg>
-		<span>Bedtime: </span><span class="bedtime-status" id="bedtimeStatus">Off</span>
+		<span data-i18n="bb.bedtime">Bedtime</span>: <span class="bedtime-status" id="bedtimeStatus" data-i18n="bb.bedtimeOff">Off</span>
 		<svg class="icon chevron" id="bedtimeChevron" style="width:16px;height:16px;margin-left:auto"><use href="#ico-chevron"/></svg>
 	</div>
 	<div class="bedtime-buttons" id="bedtimeButtons">
@@ -338,7 +338,7 @@ dialog .dialog-close {
 	<div class="quick-assign" id="quickAssign">
 		<svg class="icon icon-lg"><use href="#ico-tag"/></svg>
 		<p id="quickAssignText" data-i18n="quickAssign.idle">Place a card to assign music</p>
-		<button id="quickAssignBtn" class="hidden">Assign Music</button>
+		<button id="quickAssignBtn" class="hidden" data-i18n="bb.assignMusic">Assign Music</button>
 	</div>
 </div>
 
@@ -374,7 +374,7 @@ dialog .dialog-close {
 
 <!-- ========== TAGS VIEW ========== -->
 <div class="view" id="view-tags">
-	<h2>Cards</h2>
+	<h2 data-i18n="bb.cards">Cards</h2>
 	<div id="tagList"></div>
 	<button class="fab" onclick="openAssignDialog()" title="Link new card">
 		<svg class="icon icon-xl"><use href="#ico-plus"/></svg>
@@ -385,28 +385,37 @@ dialog .dialog-close {
 <div class="view" id="view-settings">
 	<h2 data-i18n="nav.settings">Settings</h2>
 
+	<div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem">
+		<svg class="icon"><use href="#ico-info"/></svg>
+		<select id="langSelect" onchange="changeLanguage(this.value)" style="flex:1;margin:0">
+			<option value="en">English</option>
+			<option value="de">Deutsch</option>
+			<option value="fr">Français</option>
+		</select>
+	</div>
+
 	<!-- Volume -->
 	<div class="settings-group" id="settingsAudio">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-vol-up"/></svg> Volume</span>
+			<span><svg class="icon"><use href="#ico-vol-up"/></svg> <span data-i18n="bb.volume">Volume</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 		<div class="settings-group-body">
 			<div class="setting-row">
-				<label>Startup volume: <span id="s_initVolumeVal">5</span></label>
+				<label><span data-i18n="bb.startupVol">Startup volume</span>: <span id="s_initVolumeVal">5</span></label>
 				<input type="range" id="s_initVolume" min="1" max="21" value="5" oninput="document.getElementById('s_initVolumeVal').textContent=this.value">
 			</div>
 			<div class="setting-row">
-				<label>Volume limit: <span id="s_maxVolSpeakerVal">21</span></label>
+				<label><span data-i18n="bb.volLimit">Volume limit</span>: <span id="s_maxVolSpeakerVal">21</span></label>
 				<input type="range" id="s_maxVolSpeaker" min="1" max="21" value="21" oninput="document.getElementById('s_maxVolSpeakerVal').textContent=this.value">
 			</div>
 			<div class="setting-row">
-				<label>Headphone limit: <span id="s_maxVolHeadphoneVal">21</span></label>
+				<label><span data-i18n="bb.hpLimit">Headphone limit</span>: <span id="s_maxVolHeadphoneVal">21</span></label>
 				<input type="range" id="s_maxVolHeadphone" min="1" max="21" value="21" oninput="document.getElementById('s_maxVolHeadphoneVal').textContent=this.value">
 			</div>
-			<div class="checkbox-row"><input type="checkbox" id="s_recoverVol"><label for="s_recoverVol">Remember volume</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_volumeCurve"><label for="s_volumeCurve">Smooth quiet volume</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_pauseMinVol"><label for="s_pauseMinVol">Pause when muted</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_recoverVol"><label for="s_recoverVol" data-i18n="bb.rememberVol">Remember volume</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_volumeCurve"><label for="s_volumeCurve" data-i18n="bb.smoothQuiet">Smooth quiet volume</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_pauseMinVol"><label for="s_pauseMinVol" data-i18n="bb.pauseMuted">Pause when muted</label></div>
 			<button onclick="saveGeneralSettings()">Save</button>
 		</div>
 	</div>
@@ -414,18 +423,18 @@ dialog .dialog-close {
 	<!-- Playback -->
 	<div class="settings-group" id="settingsPlayback">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-play"/></svg> Playback</span>
+			<span><svg class="icon"><use href="#ico-play"/></svg> <span data-i18n="bb.playback">Playback</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 		<div class="settings-group-body">
-			<div class="checkbox-row"><input type="checkbox" id="s_pauseRfidRemoved"><label for="s_pauseRfidRemoved">Pause when card is lifted</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_savePosShutdown"><label for="s_savePosShutdown">Resume after power off</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_savePosRfid"><label for="s_savePosRfid">Resume when switching cards</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_playLastOnReboot"><label for="s_playLastOnReboot">Auto-play on power on</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_noRfidTwice"><label for="s_noRfidTwice">Ignore card re-tap</label></div>
-			<div class="checkbox-row"><input type="checkbox" id="s_playMono"><label for="s_playMono">Mono audio</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_pauseRfidRemoved"><label for="s_pauseRfidRemoved" data-i18n="bb.pauseLift">Pause when card is lifted</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_savePosShutdown"><label for="s_savePosShutdown" data-i18n="bb.resumePower">Resume after power off</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_savePosRfid"><label for="s_savePosRfid" data-i18n="bb.resumeSwitch">Resume when switching cards</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_playLastOnReboot"><label for="s_playLastOnReboot" data-i18n="bb.autoPlay">Auto-play on power on</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_noRfidTwice"><label for="s_noRfidTwice" data-i18n="bb.ignoreRetap">Ignore card re-tap</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_playMono"><label for="s_playMono" data-i18n="bb.monoAudio">Mono audio</label></div>
 			<div class="setting-row">
-				<label>Turn off after idle: <span id="s_sleepVal">10m</span></label>
+				<label><span data-i18n="bb.turnOffIdle">Turn off after idle</span>: <span id="s_sleepVal">10m</span></label>
 				<input type="range" id="s_sleepInactivity" min="0" max="120" value="10" oninput="var v=this.value;document.getElementById('s_sleepVal').textContent=v==0?'never':v+'m'">
 			</div>
 			<button onclick="saveGeneralSettings()">Save</button>
@@ -435,12 +444,12 @@ dialog .dialog-close {
 	<!-- Sound -->
 	<div class="settings-group" id="settingsSound">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-music"/></svg> Sound</span>
+			<span><svg class="icon"><use href="#ico-music"/></svg> <span data-i18n="bb.sound">Sound</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 		<div class="settings-group-body">
 			<div class="setting-row">
-				<label>Equalizer</label>
+				<label data-i18n="bb.equalizer">Equalizer</label>
 				<div style="display:flex;gap:8px;align-items:center">
 					<span style="font-size:0.8rem">Bass</span>
 					<input type="range" id="s_eqLow" min="-6" max="6" value="0" style="flex:1" oninput="this.nextElementSibling.textContent=this.value+'dB'"><span style="font-size:0.8rem;width:3em">0dB</span>
@@ -457,15 +466,15 @@ dialog .dialog-close {
 			<details style="margin-top:8px">
 				<summary style="font-size:0.8rem;cursor:pointer;color:var(--pico-muted-color)">Advanced</summary>
 				<div class="setting-row" style="margin-top:8px">
-					<label>File ordering</label>
+					<label data-i18n="bb.fileOrdering">File ordering</label>
 					<select id="s_playlistSort">
-						<option value="3">Smart sorting (A=a)</option>
-						<option value="2">Smart sorting (A≠a)</option>
-						<option value="1">Basic (ASCII order)</option>
+						<option value="3" data-i18n="bb.smartSort">Smart sorting (A=a)</option>
+						<option value="2" data-i18n="bb.smartSortCase">Smart sorting (A≠a)</option>
+						<option value="1" data-i18n="bb.basicSort">Basic (ASCII order)</option>
 					</select>
 				</div>
 				<div class="setting-row">
-					<label>Subfolder depth</label>
+					<label data-i18n="bb.subfolderDepth">Subfolder depth</label>
 					<select id="s_playlistDepth">
 						<option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option>
 					</select>
@@ -516,16 +525,16 @@ dialog .dialog-close {
 	<!-- LEDs (simplified for BigBoi: eyes + nose backlit) -->
 	<div class="settings-group hidden" id="settingsLed">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-music"/></svg> Lights</span>
+			<span><svg class="icon"><use href="#ico-music"/></svg> <span data-i18n="bb.lights">Lights</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 		<div class="settings-group-body">
 			<div class="setting-row">
-				<label>Light brightness: <span id="s_initBrightnessVal">64</span></label>
+				<label><span data-i18n="bb.lightBrightness">Light brightness</span>: <span id="s_initBrightnessVal">64</span></label>
 				<input type="range" id="s_initBrightness" min="0" max="254" value="64" oninput="document.getElementById('s_initBrightnessVal').textContent=this.value">
 			</div>
 			<div class="setting-row">
-				<label>Night light: <span id="s_nightBrightnessVal">2</span></label>
+				<label><span data-i18n="bb.nightLight">Night light</span>: <span id="s_nightBrightnessVal">2</span></label>
 				<input type="range" id="s_nightBrightness" min="0" max="255" value="2" oninput="document.getElementById('s_nightBrightnessVal').textContent=this.value">
 			</div>
 			<button onclick="saveGeneralSettings()">Save</button>
@@ -544,7 +553,7 @@ dialog .dialog-close {
 	<!-- Buttons (BigBoi: Left Eye = Prev, Nose = Play/Pause, Right Eye = Next + Encoder) -->
 	<div class="settings-group" id="settingsButtons">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-settings"/></svg> Controls</span>
+			<span><svg class="icon"><use href="#ico-settings"/></svg> <span data-i18n="bb.controls">Controls</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 		<div class="settings-group-body" id="buttonSettingsBody"></div>
@@ -553,11 +562,11 @@ dialog .dialog-close {
 	<!-- Rotary Encoder (kept, shown when firmware reports it) -->
 	<div class="settings-group hidden" id="settingsRotary">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-settings"/></svg> Volume Knob</span>
+			<span><svg class="icon"><use href="#ico-settings"/></svg> <span data-i18n="bb.volKnob">Volume Knob</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 		<div class="settings-group-body">
-			<div class="checkbox-row"><input type="checkbox" id="s_rotaryReverse"><label for="s_rotaryReverse">Reverse volume knob</label></div>
+			<div class="checkbox-row"><input type="checkbox" id="s_rotaryReverse"><label for="s_rotaryReverse" data-i18n="bb.reverseKnob">Reverse volume knob</label></div>
 			<button onclick="saveGeneralSettings()">Save</button>
 		</div>
 	</div>
@@ -631,7 +640,7 @@ dialog .dialog-close {
 	<!-- Modification Tags -->
 	<div class="settings-group" id="settingsModTags">
 		<div class="settings-group-header" onclick="toggleGroup(this)">
-			<span><svg class="icon"><use href="#ico-tag"/></svg> Action Cards</span>
+			<span><svg class="icon"><use href="#ico-tag"/></svg> <span data-i18n="bb.actionCards">Action Cards</span></span>
 			<svg class="icon chevron"><use href="#ico-chevron"/></svg>
 		</div>
 <<<<<<< HEAD
@@ -655,13 +664,13 @@ dialog .dialog-close {
 				</div>
 =======
 		<div class="settings-group-body">
-			<p style="font-size:0.85rem;color:var(--pico-muted-color)">Assign special actions to cards (sleep timer, keylock, etc.)</p>
+			<p style="font-size:0.85rem;color:var(--pico-muted-color)" data-i18n="bb.actionCardsDesc">Assign special actions to cards (sleep timer, keylock, etc.)</p>
 			<div class="setting-row">
-			<label>Card number (12 digits)</label>
+			<label data-i18n="bb.cardNumber">Card number (12 digits)</label>
 			<input type="text" id="s_modTagId" maxlength="12" pattern="[0-9]{12}" placeholder="000000000000">
 			</div>
 			<div class="setting-row">
-				<label>Action</label>
+				<label data-i18n="bb.action">Action</label>
 				<select id="s_modAction"></select>
 			</div>
 			<button onclick="saveModTag()" data-i18n="submit">Assign</button>
@@ -679,7 +688,7 @@ dialog .dialog-close {
 				<button onclick="showInfo()"><svg class="icon"><use href="#ico-info"/></svg> Info</button>
 				<button onclick="showLog()"><svg class="icon"><use href="#ico-log"/></svg> Log</button>
 			</div>
-			<div class="section-title">Card Backup</div>
+			<div class="section-title" data-i18n="bb.cardBackup">Card Backup</div>
 			<div class="btn-row" style="margin-bottom:8px">
 				<a href="/explorerdownload?path=/backup.txt" target="_blank"><button type="button" data-i18n="tools.nvs.export.title">Export</button></a>
 			</div>
@@ -688,7 +697,7 @@ dialog .dialog-close {
 				<input type="file" id="nvsImportFile" accept=".txt">
 				<button onclick="importNvs()" style="margin-top:4px" data-i18n="submit">Import</button>
 			</div>
-			<button onclick="confirmEraseNvs()" style="background:#c62828;border-color:#c62828;color:#fff">Erase All Cards</button>
+			<button onclick="confirmEraseNvs()" style="background:#c62828;border-color:#c62828;color:#fff" data-i18n="bb.eraseAll">Erase All Cards</button>
 			<hr>
 			<div class="section-title" id="fwUpdateSection" data-i18n="tools.fwupdate.title">Firmware Update</div>
 			<input type="file" id="fwFile" accept=".bin">
@@ -719,7 +728,7 @@ dialog .dialog-close {
 	</button>
 	<button onclick="switchView('tags',this)" title="Cards">
 		<svg><use href="#ico-tag"/></svg>
-		<span>Cards</span>
+		<span data-i18n="bb.cards">Cards</span>
 	</button>
 	<button onclick="switchView('settings',this)" data-i18n="[title]nav.general">
 		<svg><use href="#ico-settings"/></svg>
@@ -734,24 +743,24 @@ dialog .dialog-close {
 <dialog id="assignDialog" style="max-width:600px">
 <article>
 	<div class="dialog-header">
-		<h3>Link Card</h3>
+		<h3 data-i18n="bb.linkCard">Link Card</h3>
 		<button class="dialog-close" onclick="this.closest('dialog').close()">&times;</button>
 	</div>
 	<div class="setting-row">
-		<label>Card number (12 digits)</label>
+		<label data-i18n="bb.cardNumber">Card number (12 digits)</label>
 		<input type="text" id="assignTagId" maxlength="12" pattern="[0-9]{12}">
 	</div>
 	<div class="setting-row">
-		<label id="assignFileLabel">File / Folder</label>
+		<label id="assignFileLabel" data-i18n="bb.fileFolder">File / Folder</label>
 		<input type="text" id="assignFileOrUrl" maxlength="255" placeholder="/mp3/MyAlbum">
 		<button id="assignBrowseBtn" onclick="openFilePicker()" style="margin-top:4px" type="button">Browse...</button>
 	</div>
 	<div class="setting-row">
-		<label>Play Mode</label>
+		<label data-i18n="bb.playMode">Play Mode</label>
 		<select id="assignPlayMode" onchange="updatePlayModeDesc()"></select>
 		<div id="playModeDesc" style="font-size:0.8rem;margin-top:2px;padding:6px 8px;background:var(--pico-muted-border-color)"></div>
 		<details id="playModeInfo" style="margin-top:8px;font-size:0.8rem">
-			<summary style="cursor:pointer;color:var(--espuino-primary)">What do the play modes mean?</summary>
+			<summary style="cursor:pointer;color:var(--espuino-primary)" data-i18n="bb.playModeExplain">What do the play modes mean?</summary>
 			<div id="playModeInfoList" style="margin-top:8px"></div>
 		</details>
 	</div>
@@ -1842,8 +1851,21 @@ function initI18n() {
 			if (['de','en','fr'].indexOf(bl) >= 0) i18next.changeLanguage(bl);
 		}
 		applyTranslations();
+		var sel = document.getElementById('langSelect');
+		if (sel) sel.value = i18next.language;
 	});
-	i18next.on('languageChanged', function() { applyTranslations(); });
+	i18next.on('languageChanged', function(lng) {
+		applyTranslations();
+		var sel = document.getElementById('langSelect');
+		if (sel) sel.value = lng;
+	});
+}
+
+function changeLanguage(lang) {
+	localStorage.setItem('language', lang);
+	if (typeof i18next !== 'undefined' && i18next.isInitialized) {
+		i18next.changeLanguage(lang);
+	}
 }
 
 function applyTranslations() {
@@ -3713,7 +3735,7 @@ function renderTagList(tags) {
 }
 
 function confirmDeleteTag(tagId) {
-	showConfirm('Remove Card', 'Remove card ' + tagId + '?', function() {
+	showConfirm(T('bb.removeCard'), T('bb.removePrompt', {id: tagId}), function() {
 		fetch('http://' + host + '/rfid?id=' + encodeURIComponent(tagId), {method:'DELETE'})
 			.then(function(r) {
 				if (r.ok) { showToast(T('toast.success'), 'success'); loadTagList(); }
@@ -3799,7 +3821,7 @@ function submitAssignment() {
 	var tagId = document.getElementById('assignTagId').value;
 	var fileOrUrl = document.getElementById('assignFileOrUrl').value.replace(/\/$/, '');
 	var playMode = document.getElementById('assignPlayMode').value;
-	if (!tagId || !fileOrUrl) { showToast('Please fill card number and file/URL', 'warning'); return; }
+	if (!tagId || !fileOrUrl) { showToast(T('bb.fillFields'), 'warning'); return; }
 	if (socket) {
 		expectOkToast = true;
 		wsSend({rfidAssign:{rfidIdMusic:tagId, fileOrUrl:fileOrUrl, playMode:playMode}});
@@ -4343,7 +4365,7 @@ function confirmShutdown() {
 }
 
 function confirmEraseNvs() {
-	showConfirm('Erase All Cards', 'Erase all card assignments? This cannot be undone.', function() {
+	showConfirm(T('bb.eraseAll'), T('bb.erasePrompt'), function() {
 		fetch('http://' + host + '/rfidnvserase', {method:'POST'})
 			.then(function(r) {
 				if (r.ok) { showToast(T('toast.success'), 'success'); loadTagList(); }

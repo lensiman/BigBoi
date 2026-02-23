@@ -15,16 +15,16 @@
 	"infos": "Infos",
 	"darkmode": "Mode sombre",
 	"restartinfo": "BigBoi est en cours de redémarrage...<br>La page se recharge automatiquement après la fin du redémarrage.",
-	"shutdowninfo": "BigBoi est maintenant éteint...<br>La page se recharge automatiquement lorsque l'BigBoi est rallumé.",
+	"shutdowninfo": "BigBoi est maintenant éteint...<br>La page se recharge automatiquement lorsque le BigBoi est rallumé.",
 	"toast": {
-		"rfidDetect": "Étiquette RFID {{rfidId}} détectée.",
+		"rfidDetect": "Carte {{rfidId}} détectée.",
 		"success": "Action effectuée avec succès.",
-		"conlost": "Connexion à l'BigBoi perdue! Veuillez recharger la page.",
+		"conlost": "Connexion au BigBoi perdue ! Veuillez recharger la page.",
 		"dropout": "flux lent, des interruptions sont possibles."
 	},
 	"nav": {
 		"control": "Lecteur",
-		"rfid": "RFID",
+		"rfid": "carte",
 		"wifi": "WiFi",
 		"mqtt": "MQTT",
 		"ftp": "FTP",
@@ -104,7 +104,7 @@
 			"validation": "Entrez le mot de passe du WiFi"
 		},
 		"hostname": {
-			"title": "Nom de l'BigBoi (nom d'hôte)",
+			"title": "Nom du BigBoi (nom d'hôte)",
 			"placeholder": "espuino",
 			"validation": "Entrez un nom d'hôte valide"
 		},
@@ -175,8 +175,8 @@
 			"progress": "{{percent}}% ({{speed}} Ko/s), {{remaining.value}} {{remaining.unit}} restant..."
 		},
 		"rfid": {
-			"title": "Assignations RFID",
-			"idNumber": "Numéro RFID (12 chiffres) ou <a href=\"https://forum.espuino.de/t/virtual-rfid-cards\" target=\"_blank\">virtuelle</a>",
+			"title": "Cartes",
+			"idNumber": "Numéro carte (12 chiffres) ou <a href=\"https://forum.espuino.de/t/virtual-rfid-cards\" target=\"_blank\">virtuelle</a>",
 			"music": "Musique",
 			"modification": "Modification",
 			"fileurl": {
@@ -246,16 +246,16 @@
 					"184": "Passer au dossier suivant",
 					"185": "Passer au dossier précédent",
 					"199": "Affichage de la charge de travail (console)",
-					"241": "Jouez à la carte RFID virtuelle 01",
-					"242": "Jouez à la carte RFID virtuelle 02",
-					"243": "Jouez à la carte RFID virtuelle 03",
-					"244": "Jouez à la carte RFID virtuelle 04",
-					"245": "Jouez à la carte RFID virtuelle 05",
-					"246": "Jouez à la carte RFID virtuelle 06",
-					"247": "Jouez à la carte RFID virtuelle 07",
-					"248": "Jouez à la carte RFID virtuelle 08",
-					"249": "Jouez à la carte RFID virtuelle 09",
-					"250": "Jouez à la carte RFID virtuelle 10"
+					"241": "Jouer carte virtuelle 01",
+					"242": "Jouer carte virtuelle 02",
+					"243": "Jouer carte virtuelle 03",
+					"244": "Jouer carte virtuelle 04",
+					"245": "Jouer carte virtuelle 05",
+					"246": "Jouer carte virtuelle 06",
+					"247": "Jouer carte virtuelle 07",
+					"248": "Jouer carte virtuelle 08",
+					"249": "Jouer carte virtuelle 09",
+					"250": "Jouer carte virtuelle 10"
 				}
 			}
 		}
@@ -375,14 +375,14 @@
 			"playMonoExp": "Si deux haut-parleurs sont installés, la stéréo peut être jouée. Plus d'infos <a href='https://forum.espuino.de/t/stereo-ausgabe/341' target='_blank'>ici</a>.",
 			"savePlayPosShutdown": "Mémoriser la position de lecture à l'extinction",
 			"savePlayPosShutdownExp": "Lorsque la boîte est éteinte, la position de lecture est enregistrée pour les livres audio. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>SAVE_PLAYPOS_BEFORE_SHUTDOWN</code>.",
-			"savePlayPosRfidChange": "Mémoriser la position de lecture au changement de tag RFID",
-			"savePlayPosRfidChangeExp": "Lors du passage à une nouvelle balise RFID, la position de lecture est enregistrée pour les livres audio. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>SAVE_PLAYPOS_WHEN_RFID_CHANGE</code>.",
-			"pauseIfRfidRemoved": "Mettre en pause si la balise RFID est retirée",
-			"pauseIfRfidRemovedExp": "Mettre en pause la lecture si la balise RFID est retirée. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>PAUSE_IF_RFID_REMOVED</code>.",
-			"dontAcceptRfidTwice": "Ne pas accepter la balise RFID deux fois",
-			"dontAcceptRfidTwiceExp": "Ne pas accepter la même balise RFID deux fois. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>DONT_ACCEPT_RFID_TWICE</code>.",
-			"playLastRfidOnReboot": "Lire la dernière balise RFID au redémarrage",
-			"playLastRfidOnRebootExp": "La dernière balise RFID lue est lue après le redémarrage. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>PLAY_LAST_RFID_ON_REBOOT</code>.",
+			"savePlayPosRfidChange": "Mémoriser la position de lecture au changement de tag carte",
+			"savePlayPosRfidChangeExp": "Lors du passage à une nouvelle balise carte, la position de lecture est enregistrée pour les livres audio. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>SAVE_PLAYPOS_WHEN_carte_CHANGE</code>.",
+			"pauseIfRfidRemoved": "Mettre en pause si la balise carte est retirée",
+			"pauseIfRfidRemovedExp": "Mettre en pause la lecture si la balise carte est retirée. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>PAUSE_IF_carte_REMOVED</code>.",
+			"dontAcceptRfidTwice": "Ne pas accepter la balise carte deux fois",
+			"dontAcceptRfidTwiceExp": "Ne pas accepter la même balise carte deux fois. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>DONT_ACCEPT_carte_TWICE</code>.",
+			"playLastRfidOnReboot": "Lire la dernière balise carte au redémarrage",
+			"playLastRfidOnRebootExp": "La dernière balise carte lue est lue après le redémarrage. Plus d'informations <a href='https://forum.espuino.de/t/welche-optionen-beim-kompilieren-gibt-es/120' target='_blank'>ici</a> sous <code>PLAY_LAST_carte_ON_REBOOT</code>.",
 			"pauseOnMinVolume": "Pause au volume minimal",
 			"pauseOnMinVolumeExp": "La lecture est mise en pause lorsque le volume atteint le minimum.Plus d'infos <a href='https://forum.espuino.de/t/lautstaerke-0-pause/1631' target='_blank'>ici</a>.",
 			"recoverVolBoot": "Utiliser le dernier volume au redémarrage",
@@ -419,28 +419,28 @@
 	},
 	"tools": {
 		"nvs": {
-			"title": "Assignations RFID enregistrées",
-			"desc": "Les affectations RFID ne sont pas stockées sur la carte SD, mais sur la mémoire interne non volatile (NVS) de l'BigBoi.",
+			"title": "Assignations carte enregistrées",
+			"desc": "Les affectations carte ne sont pas stockées sur la carte SD, mais sur la mémoire interne non volatile (NVS) du BigBoi.",
 			"list": {
-				"title": "Liste de toutes les affectations RFID enregistrées"
+				"title": "Liste de toutes les affectations carte enregistrées"
 			},
 			"erase": {
-				"title": "Effacer toutes les assignations RFID",
-				"desc": "Via l'importateur, de nouvelles entrées seront uniquement insérées mais les anciennes ne seront pas effacées. Seules les anciennes assignations au même entrée seront écrasées. Avec cette fonction, toutes les assignations RFID existantes seront effacées. Autres <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">informations</a> (en allemand).",
+				"title": "Effacer toutes les assignations carte",
+				"desc": "Via l'importateur, de nouvelles entrées seront uniquement insérées mais les anciennes ne seront pas effacées. Seules les anciennes assignations au même entrée seront écrasées. Avec cette fonction, toutes les assignations carte existantes seront effacées. Autres <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">informations</a> (en allemand).",
 				"button": "Supprimer toutes les assignations",
-				"prompt": "Effacer toutes les assignations RFID enregistrées?"
+				"prompt": "Effacer toutes les assignations carte enregistrées?"
 			},
 			"delete": {
-				"title": "Effacer le assignations RFID",
+				"title": "Effacer le assignations carte",
 				"prompt": "Remove assignment \"{{rfid}}\"?"
 			},
 			"import": {
 				"title": "Importer",
-				"desc": "Le fichier de sauvegarde peut être téléchargé ici pour importer les assignations RFID."
+				"desc": "Le fichier de sauvegarde peut être téléchargé ici pour importer les assignations carte."
 			},
 			"export": {
 				"title": "Exporter",
-				"desc": "Un fichier de sauvegarde peut être téléchargé ici afin d'exporter les attributions RFID."
+				"desc": "Un fichier de sauvegarde peut être téléchargé ici afin d'exporter les attributions carte."
 			}
 		},
 		"fwupdate": {
@@ -451,7 +451,7 @@
 	"help": {
 		"forum": {
 			"title": "Forum",
-			"desc": "Rencontrez-vous des problèmes ou souhaitez-vous discuter à propos d'BigBoi?<br /> Rejoignez-nous sur le <a href=\"https://forum.espuino.de\" target=\"_blank\">Forum BigBoi</a>! Surtout, il y a beaucoup de <a href=\"https://forum.espuino.de/c/dokumentation/anleitungen/10\" target=\"_blank\">documentation</a> en ligne!"
+			"desc": "Rencontrez-vous des problèmes ou souhaitez-vous discuter à propos du BigBoi ?<br /> Rejoignez-nous sur le <a href=\"https://forum.espuino.de\" target=\"_blank\">Forum BigBoi</a>! Surtout, il y a beaucoup de <a href=\"https://forum.espuino.de/c/dokumentation/anleitungen/10\" target=\"_blank\">documentation</a> en ligne!"
 		},
 		"swagger": {
 			"title": "Swagger",
@@ -485,5 +485,53 @@
 		"currvoltage": "Tension de la batterie actuelle : {{currvoltage}} V",
 		"chargelevel": "Niveau de charge actuel : {{chargelevel}} %",
 		"hallsensor": "Valeur nulle du capteur d'effet Hall : {{hsnullfieldvalue}}, actuel : {{hsactual}}, diff : {{hsdiff}}, Dernier état de LastWaitFor : {{hslastwaitforstate}} (attendu : {{hswaited}} ms)"
+	},
+	"bb": {
+		"cards": "Cartes",
+		"linkCard": "Lier une carte",
+		"cardNumber": "Numéro de carte (12 chiffres)",
+		"assignMusic": "Assigner musique",
+		"bedtime": "Heure du coucher",
+		"bedtimeOff": "Désactivé",
+		"volume": "Volume",
+		"startupVol": "Volume au démarrage",
+		"volLimit": "Limite de volume",
+		"hpLimit": "Limite casque",
+		"rememberVol": "Mémoriser le volume",
+		"smoothQuiet": "Volume doux et fin",
+		"pauseMuted": "Pause en sourdine",
+		"playback": "Lecture",
+		"pauseLift": "Pause quand la carte est retirée",
+		"resumePower": "Reprendre après extinction",
+		"resumeSwitch": "Reprendre au changement de carte",
+		"autoPlay": "Lecture auto au démarrage",
+		"ignoreRetap": "Ignorer le double tap",
+		"monoAudio": "Audio mono",
+		"turnOffIdle": "Éteindre après inactivité",
+		"sound": "Son",
+		"equalizer": "Égaliseur",
+		"fileOrdering": "Tri des fichiers",
+		"subfolderDepth": "Profondeur des sous-dossiers",
+		"lights": "Éclairage",
+		"lightBrightness": "Luminosité",
+		"nightLight": "Veilleuse",
+		"controls": "Commandes",
+		"volKnob": "Molette de volume",
+		"reverseKnob": "Inverser la molette",
+		"actionCards": "Cartes d'action",
+		"actionCardsDesc": "Assigner des actions spéciales aux cartes (minuterie, verrouillage, etc.)",
+		"action": "Action",
+		"cardBackup": "Sauvegarde des cartes",
+		"eraseAll": "Effacer toutes les cartes",
+		"erasePrompt": "Effacer toutes les cartes ? Cette action est irréversible.",
+		"removeCard": "Retirer la carte",
+		"removePrompt": "Retirer la carte {{id}} ?",
+		"fileFolder": "Fichier / Dossier",
+		"playMode": "Mode de lecture",
+		"playModeExplain": "Que signifient les modes de lecture ?",
+		"fillFields": "Veuillez remplir le numéro de carte et le fichier/URL",
+		"smartSort": "Tri naturel (A=a)",
+		"smartSortCase": "Tri naturel (A≠a)",
+		"basicSort": "Basique (ordre ASCII)"
 	}
 }

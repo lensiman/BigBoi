@@ -15,9 +15,9 @@
 	"infos": "Infos",
 	"darkmode": "Dark Mode",
 	"restartinfo": "BigBoi is being restarted...<br>Page reloads automatically after restart finished.",
-	"shutdowninfo": "BigBoi is now switched off...<br>Page reloads automatically when the BigBoi is switched on again.",
+	"shutdowninfo": "BigBoi is now switched off...<br>Page reloads automatically when BigBoi is switched on again.",
 	"toast": {
-		"rfidDetect": "RFID tag {{rfidId}} detected.",
+		"rfidDetect": "Card {{rfidId}} detected.",
 		"success": "Action performed successfully.",
 		"conlost": "Connection to BigBoi broken! Please reload website.",
 		"dropout": "slow stream, dropouts are possible."
@@ -175,7 +175,7 @@
 			"progress": "{{percent}}% ({{speed}} KB/s), {{remaining.value}} {{remaining.unit}} remaining..."
 		},
 		"rfid": {
-			"title": "RFID Assignments",
+			"title": "Card Assignments",
 			"idNumber": "RFID-number (12 digits) or <a href=\"https://forum.espuino.de/t/virtual-rfid-cards\" target=\"_blank\">virtual</a>",
 			"music": "Music",
 			"modification": "Modification",
@@ -246,16 +246,16 @@
 					"184": "Jump to next folder",
 					"185": "Jump to previous folder",
 					"199": "Display task load (console)",
-					"241": "Play virtual RFID-card 01",
-					"242": "Play virtual RFID-card 02",
-					"243": "Play virtual RFID-card 03",
-					"244": "Play virtual RFID-card 04",
-					"245": "Play virtual RFID-card 05",
-					"246": "Play virtual RFID-card 06",
-					"247": "Play virtual RFID-card 07",
-					"248": "Play virtual RFID-card 08",
-					"249": "Play virtual RFID-card 09",
-					"250": "Play virtual RFID-card 10"
+					"241": "Play virtual card 01",
+					"242": "Play virtual card 02",
+					"243": "Play virtual card 03",
+					"244": "Play virtual card 04",
+					"245": "Play virtual card 05",
+					"246": "Play virtual card 06",
+					"247": "Play virtual card 07",
+					"248": "Play virtual card 08",
+					"249": "Play virtual card 09",
+					"250": "Play virtual card 10"
 				}
 			}
 		}
@@ -419,28 +419,28 @@
 	},
 	"tools": {
 		"nvs": {
-			"title": "Saved RFID assignments",
-			"desc": "The RFID assignments are not stored on the SD card but on the internal, non-volative storage (NVS) of the BigBoi.",
+			"title": "Saved card assignments",
+			"desc": "Card assignments are stored in BigBoi's internal memory (NVS), not on the SD card.",
 			"list": {
-				"title": "List of all stored RFID assignments"
+				"title": "All saved cards"
 			},
 			"erase": {
-				"title": "Erase all RFID assignments",
-				"desc": "Via importer new entries will only be inserted but old ones won't be erased. Only in case an old assignment to the same entry already exists, it will be overwritten. With this function all existing RFID assignments will be erased.<br>Further <a href=\"https://forum.espuino.de/t/die-backupfunktion-des-espuino/508\" target=\"_blank\">infos</a> (in German).",
-				"button": "Delete all assignments",
-				"prompt": "Erase all saved RFID assignments?"
+				"title": "Erase all cards",
+				"desc": "This will remove all card assignments. Imported entries only add new ones; existing ones are overwritten if duplicated.",
+				"button": "Delete all cards",
+				"prompt": "Erase all saved card assignments?"
 			},
 			"delete": {
-				"title": "Erase RFID assignment",
-				"prompt": "Remove assignment \"{{rfid}}\"?"
+				"title": "Remove card",
+				"prompt": "Remove card \"{{rfid}}\"?"
 			},
 			"import": {
 				"title": "Import",
-				"desc": "A backup file can be uploaded here in order to import RFID assignments."
+				"desc": "Upload a backup file to import card assignments."
 			},
 			"export": {
 				"title": "Export",
-				"desc": "A backup file can be download here in order to export the RFID assignments."
+				"desc": "Download a backup of all card assignments."
 			}
 		},
 		"fwupdate": {
@@ -485,5 +485,53 @@
 		"currvoltage": "Current battery voltage: {{currvoltage}} V",
 		"chargelevel": "Current charge level: {{chargelevel}} %",
 		"hallsensor": "HallEffectSensor NullFieldValue: {{hsnullfieldvalue}}, actual: {{hsactual}}, diff:{{hsdiff}}, LastWaitFor_State:{{hslastwaitforstate}} (waited:{{hswaited}} ms)"
+	},
+	"bb": {
+		"cards": "Cards",
+		"linkCard": "Link Card",
+		"cardNumber": "Card number (12 digits)",
+		"assignMusic": "Assign Music",
+		"bedtime": "Bedtime",
+		"bedtimeOff": "Off",
+		"volume": "Volume",
+		"startupVol": "Startup volume",
+		"volLimit": "Volume limit",
+		"hpLimit": "Headphone limit",
+		"rememberVol": "Remember volume",
+		"smoothQuiet": "Smooth quiet volume",
+		"pauseMuted": "Pause when muted",
+		"playback": "Playback",
+		"pauseLift": "Pause when card is lifted",
+		"resumePower": "Resume after power off",
+		"resumeSwitch": "Resume when switching cards",
+		"autoPlay": "Auto-play on power on",
+		"ignoreRetap": "Ignore card re-tap",
+		"monoAudio": "Mono audio",
+		"turnOffIdle": "Turn off after idle",
+		"sound": "Sound",
+		"equalizer": "Equalizer",
+		"fileOrdering": "File ordering",
+		"subfolderDepth": "Subfolder depth",
+		"lights": "Lights",
+		"lightBrightness": "Light brightness",
+		"nightLight": "Night light",
+		"controls": "Controls",
+		"volKnob": "Volume Knob",
+		"reverseKnob": "Reverse volume knob",
+		"actionCards": "Action Cards",
+		"actionCardsDesc": "Assign special actions to cards (sleep timer, keylock, etc.)",
+		"action": "Action",
+		"cardBackup": "Card Backup",
+		"eraseAll": "Erase All Cards",
+		"erasePrompt": "Erase all card assignments? This cannot be undone.",
+		"removeCard": "Remove Card",
+		"removePrompt": "Remove card {{id}}?",
+		"fileFolder": "File / Folder",
+		"playMode": "Play Mode",
+		"playModeExplain": "What do the play modes mean?",
+		"fillFields": "Please fill card number and file/URL",
+		"smartSort": "Smart sorting (A=a)",
+		"smartSortCase": "Smart sorting (A≠a)",
+		"basicSort": "Basic (ASCII order)"
 	}
 }
