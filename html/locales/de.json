@@ -14,8 +14,8 @@
 	"showhide": "Ein-/Ausblenden",
 	"infos": "Infos",
 	"darkmode": "Dunkelmodus",
-	"restartinfo": "BigBoi wird jetzt neu gestartet...<br>Die Seite lädt sich nach dem Neustart automatisch neu.",
-	"shutdowninfo": "BigBoi wird jetzt ausgeschaltet...<br>Die Seite lädt sich nach dem Wiedereinschalten automatisch neu.",
+	"restartinfo": "BigBoi wird jetzt neu gestartet...\nDie Seite lädt sich nach dem Neustart automatisch neu.",
+	"shutdowninfo": "BigBoi wird jetzt ausgeschaltet...\nDie Seite lädt sich nach dem Wiedereinschalten automatisch neu.",
 	"toast": {
 		"rfidDetect": "Karte {{rfidId}} erkannt.",
 		"success": "Aktion erfolgreich ausgeführt.",

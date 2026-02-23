@@ -57,6 +57,12 @@ svg.icon-xl { width: 2em; height: 2em; }
 }
 .bottom-nav button.active { color: var(--espuino-primary); }
 .bottom-nav button svg { width: 24px; height: 24px; }
+.bottom-nav .nav-theme {
+	flex: 0; padding: 4px 12px;
+	border-left: 1px solid var(--pico-muted-border-color);
+	color: var(--pico-muted-color);
+}
+.bottom-nav .nav-theme:hover { color: var(--pico-color); }
 
 /* Views */
 .view { display: none; }
@@ -141,6 +147,12 @@ svg.icon-xl { width: 2em; height: 2em; }
 .file-list li:hover { background: var(--pico-muted-border-color); }
 .file-list li .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .file-list li .file-actions { display: flex; gap: 2px; flex-shrink: 0; }
+.file-list li .file-play {
+	flex-shrink: 0; border: none; background: none;
+	cursor: pointer; color: var(--espuino-primary); padding: 4px;
+	display: flex; align-items: center; justify-content: center;
+}
+.file-list li .file-play:hover { opacity: 0.7; }
 .file-list li .file-action {
 	flex-shrink: 0; opacity: 0.4; border: none; background: none;
 	cursor: pointer; color: var(--pico-color); padding: 6px;
@@ -157,11 +169,6 @@ svg.icon-xl { width: 2em; height: 2em; }
 }
 .file-back:hover { text-decoration: underline; }
 .file-back svg { width: 20px; height: 20px; }
-.upload-area {
-	border: 2px dashed var(--pico-muted-border-color);
-	border-radius: var(--espuino-radius); padding: 1rem;
-	text-align: center; margin-top: 1rem;
-}
 .upload-progress { margin-top: 0.5rem; display: none; }
 .upload-progress progress { width: 100%; }
 
@@ -232,7 +239,7 @@ dialog .dialog-close {
 .toast {
 	padding: 10px 16px; font-size: 0.85rem;
 	color: #fff; cursor: pointer; animation: slideIn 0.2s;
-	word-break: break-word;
+	word-break: break-word; white-space: pre-line;
 }
 .toast.info { background: var(--espuino-primary); }
 .toast.success { background: #2e7d32; }
@@ -264,8 +271,7 @@ dialog .dialog-close {
 [data-theme=light] .file-list li { border-color: #dde1e5; }
 [data-theme=light] .file-list li .file-action { opacity: 0.55; color: #333; }
 [data-theme=light] .file-list li .file-action:hover { opacity: 1; }
-[data-theme=light] .quick-assign,
-[data-theme=light] .upload-area { border-color: #bfc5cb; background: #f6f8fa; }
+[data-theme=light] .quick-assign { border-color: #bfc5cb; background: #f6f8fa; }
 [data-theme=light] .progress-track { background: #d5d9dd; }
 [data-theme=light] .status-bar { color: #555; }
 [data-theme=light] .bedtime-bar { color: #555; }
@@ -415,31 +421,32 @@ dialog .dialog-close {
 <!-- ========== FILES VIEW ========== -->
 <div class="view" id="view-files">
 	<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-		<button class="file-back" id="fileBackBtn" onclick="goBack()" style="display:none">
+		<button class="file-back" id="fileBackBtn" onclick="goBack()" style="visibility:hidden">
 			<svg class="icon"><use href="#ico-back"/></svg> Back
 		</button>
+		<div class="breadcrumb" id="fileBreadcrumb" style="flex:1;margin-bottom:0">
+			<button onclick="navigateTo('/')">/</button>
+		</div>
+		<button onclick="toggleUpload()" style="border:none;background:none;cursor:pointer;color:var(--espuino-primary);padding:4px;flex-shrink:0" title="Upload">
+			<svg class="icon icon-lg"><use href="#ico-upload"/></svg>
+		</button>
+	</div>
+	<div style="margin-bottom:0.5rem">
+		<input type="search" id="fileSearch" placeholder="Search files..." oninput="filterFiles(this.value)" style="width:100%;margin:0">
+	</div>
+	<div id="uploadOptions" style="display:none;gap:8px;margin-bottom:0.5rem;align-items:center;padding:8px 12px;border:1px solid var(--pico-muted-border-color)">
+		<svg class="icon" style="flex-shrink:0"><use href="#ico-upload"/></svg>
+		<span style="font-size:0.85rem;font-weight:600" data-i18n="files.upload.title">Upload</span>
 		<div style="flex:1"></div>
+		<button onclick="pickFiles(false)" data-i18n="files.files.title">Files</button>
+		<button onclick="pickFiles(true)" data-i18n="files.directory.title">Directory</button>
 	</div>
-	<div class="breadcrumb" id="fileBreadcrumb">
-		<button onclick="navigateTo('/')">/</button>
-	</div>
-	<div style="margin-bottom:0.5rem;display:flex;gap:8px">
-		<input type="search" id="fileSearch" placeholder="Search files..." oninput="filterFiles(this.value)" style="flex:1;margin:0">
+	<input type="file" id="fileInput" multiple style="display:none" onchange="handleFileUpload()">
+	<div class="upload-progress" id="uploadProgress">
+		<progress value="0" max="100"></progress>
+		<div id="uploadStatus"></div>
 	</div>
 	<ul class="file-list" id="fileList"></ul>
-	<div class="upload-area" id="uploadArea">
-		<svg class="icon icon-xl"><use href="#ico-upload"/></svg>
-		<p data-i18n="files.upload.title">Upload files</p>
-		<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-			<button onclick="pickFiles(false)" data-i18n="files.files.title">Files</button>
-			<button onclick="pickFiles(true)" data-i18n="files.directory.title">Directory</button>
-		</div>
-		<input type="file" id="fileInput" multiple style="display:none" onchange="handleFileUpload()">
-		<div class="upload-progress" id="uploadProgress">
-			<progress value="0" max="100"></progress>
-			<div id="uploadStatus"></div>
-		</div>
-	</div>
 </div>
 
 <!-- ========== TAGS VIEW ========== -->
@@ -786,6 +793,9 @@ dialog .dialog-close {
 		<svg><use href="#ico-settings"/></svg>
 		<span data-i18n="nav.general">Settings</span>
 	</button>
+	<button id="navThemeToggle" onclick="toggleTheme()" class="nav-theme" title="Toggle light/dark">
+		<svg><use href="#ico-sun"/></svg>
+	</button>
 </nav>
 
 <!-- ========== DIALOGS ========== -->
@@ -922,7 +932,14 @@ function pmDesc(k) {
 	return (t && t !== k + 'd' && t !== 'bb.pm.' + k + 'd') ? t : (def ? def.desc : '');
 }
 
-var MOD_CMDS = [100,179,101,102,103,104,105,106,107,110,111,120,130,140,141,142,150,151,152,0,170,171,172,173,174,184,185,180,181,241,242,243,244,245,246,247,248,249,250];
+var MOD_GROUPS = [
+	{label:'Sleep Timer', cmds:[179,101,102,103,104,105,106,107]},
+	{label:'Playback', cmds:[170,171,172,173,174,184,185,180,181]},
+	{label:'Modes & Locks', cmds:[100,110,111,120]},
+	{label:'Connectivity', cmds:[130,140,141,142,150,151,152]},
+	{label:'Virtual Cards', cmds:[241,242,243,244,245,246,247,248,249,250]},
+	{label:'Remove', cmds:[0]}
+];
 var BUTTON_CMDS = [0,170,171,172,173,174,184,185,175,176,177,178,179,180,181,182,183,199,130,140,141,142,150,151,152,120,100,101,102,103,104,105,106,107,110,111,241,242,243,244,245,246,247,248,249,250];
 
 // ===== i18n =====
@@ -969,10 +986,30 @@ function changeLanguage(lang) {
 function applyTranslations() {
 	document.querySelectorAll('[data-i18n]').forEach(function(el) {
 		var keys = el.getAttribute('data-i18n');
-		if (keys.indexOf('[') === 0) return; // skip attribute translations for now
+		if (keys.indexOf('[') === 0) return;
 		var t = T(keys);
 		if (typeof t === 'string') el.textContent = t;
 	});
+	populateModSelect();
+}
+
+function populateModSelect() {
+	var sel = document.getElementById('s_modAction');
+	if (!sel) return;
+	var val = sel.value;
+	sel.innerHTML = '';
+	MOD_GROUPS.forEach(function(g) {
+		var og = document.createElement('optgroup');
+		og.label = g.label;
+		g.cmds.forEach(function(cmd) {
+			var opt = document.createElement('option');
+			opt.value = cmd;
+			opt.textContent = T('files.rfid.mod.cmd.' + cmd);
+			og.appendChild(opt);
+		});
+		sel.appendChild(og);
+	});
+	if (val) sel.value = val;
 }
 
 // ===== Toasts =====
@@ -1218,29 +1255,40 @@ function renderFileList(data, path) {
 
 	// Show/hide back button
 	var backBtn = document.getElementById('fileBackBtn');
-	backBtn.style.display = (path !== '/') ? '' : 'none';
+	backBtn.style.visibility = (path !== '/') ? '' : 'hidden';
 
 	data.forEach(function(item) {
 		var li = document.createElement('li');
 		var icon = getFileIcon(item);
 		var fullPath = (path === '/' ? '' : path) + '/' + item.name;
-		li.innerHTML = '<svg class="icon"><use href="#' + icon + '"/></svg>' +
-			'<span class="file-name">' + escHtml(item.name) + '</span>';
+		var ftype = item.dir ? 'dir' : getFileType(item.name);
+		var playable = ftype === 'dir' || ftype === 'audio' || ftype === 'playlist';
+
+		if (playable) {
+			var pb = document.createElement('button');
+			pb.className = 'file-play';
+			pb.innerHTML = '<svg class="icon"><use href="#ico-play"/></svg>';
+			pb.title = 'Play';
+			var pm = ftype === 'dir' ? 5 : (ftype === 'playlist' ? 11 : 1);
+			pb.onclick = function(e) {
+				e.stopPropagation();
+				fetch('http://' + host + '/exploreraudio?path=' + encodeURIComponent(fullPath) + '&playmode=' + pm, {method:'POST'});
+			};
+			li.appendChild(pb);
+		}
+
+		var tmp = document.createElement('div');
+		tmp.innerHTML = '<svg class="icon"><use href="#' + icon + '"/></svg><span class="file-name">' + escHtml(item.name) + '</span>';
+		while (tmp.firstChild) li.appendChild(tmp.firstChild);
 
 		var actions = document.createElement('span');
 		actions.className = 'file-actions';
 
 		if (item.dir) {
 			li.onclick = function() { loadFiles(fullPath); };
-			actions.appendChild(makeAction('ico-play', 'Play', function(e) {
-				e.stopPropagation();
-				fetch('http://' + host + '/exploreraudio?path=' + encodeURIComponent(fullPath) + '&playmode=5', {method:'POST'});
-			}));
 		} else {
-			var ftype = getFileType(item.name);
-			if (ftype === 'audio' || ftype === 'playlist') {
+			if (playable) {
 				li.onclick = function() {
-					var pm = ftype === 'playlist' ? 11 : 1;
 					fetch('http://' + host + '/exploreraudio?path=' + encodeURIComponent(fullPath) + '&playmode=' + pm, {method:'POST'});
 				};
 			}
@@ -1325,6 +1373,11 @@ function getFileType(name) {
 	if (/\.(m3u|m3u8|asx|pls)$/i.test(name)) return 'playlist';
 	if (/\.(png|jpg|jpeg|bmp|gif|webp)$/i.test(name)) return 'image';
 	return 'file';
+}
+
+function toggleUpload() {
+	var el = document.getElementById('uploadOptions');
+	el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
 }
 
 function sortFileData(data) {
@@ -2155,8 +2208,11 @@ function toggleTheme() {
 
 function updateThemeIcon() {
 	var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-	var btn = document.getElementById('themeToggle');
-	if (btn) btn.querySelector('use').setAttribute('href', isDark ? '#ico-sun' : '#ico-moon');
+	var icon = isDark ? '#ico-sun' : '#ico-moon';
+	['themeToggle', 'navThemeToggle'].forEach(function(id) {
+		var btn = document.getElementById(id);
+		if (btn) btn.querySelector('use').setAttribute('href', icon);
+	});
 }
 
 function setTitle(t) {
@@ -2175,14 +2231,7 @@ function escHtml(s) {
 
 // ===== Init =====
 function init() {
-	// Populate mod command select
-	var modSel = document.getElementById('s_modAction');
-	MOD_CMDS.forEach(function(cmd) {
-		var opt = document.createElement('option');
-		opt.value = cmd;
-		opt.textContent = T('files.rfid.mod.cmd.' + cmd);
-		modSel.appendChild(opt);
-	});
+	populateModSelect();
 
 	// Restore last view
 	var saved = localStorage.getItem('espuino-view');

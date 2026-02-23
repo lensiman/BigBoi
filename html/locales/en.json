@@ -14,8 +14,8 @@
 	"showhide": "Show/Hide",
 	"infos": "Infos",
 	"darkmode": "Dark Mode",
-	"restartinfo": "BigBoi is being restarted...<br>Page reloads automatically after restart finished.",
-	"shutdowninfo": "BigBoi is now switched off...<br>Page reloads automatically when BigBoi is switched on again.",
+	"restartinfo": "BigBoi is being restarted...\nPage reloads automatically after restart finished.",
+	"shutdowninfo": "BigBoi is now switched off...\nPage reloads automatically when BigBoi is switched on again.",
 	"toast": {
 		"rfidDetect": "Card {{rfidId}} detected.",
 		"success": "Action performed successfully.",
